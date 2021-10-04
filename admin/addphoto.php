@@ -23,13 +23,18 @@ require '../connexion.php';
     <title>ajouter une photo</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid col-6 offset-3">
     <h1 class="text-center">Ajouter une photo</h1>
     <form action="treatmentaddphoto" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
         <input type="hidden" name="MAX_FILE_SIZE" value="2000000000000">
         <label for="formFile" class="form-label">Image : </label>
         <input type="file" name="image" id="formFile" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label for="date">Date de la photo</label>
+        <input type="date" id="date" name="date" class="form-control">
     </div>
     <div class="mb-3">
         <input type="submit" name="submit" id="submit" value="Ajouter" class="form-control btn btn-success">

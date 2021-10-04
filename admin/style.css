@@ -1,3 +1,8 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
 #deco{
     margin-top: 100px;
 }
@@ -10,26 +15,19 @@
 #gsite{
     margin-top: 250px;
 }
+#gestionSite{
+    margin-top: 300px;
+}
 .photoadm{
-    width: 100px;
-    height: 100px;
+    height: 75px;
 }
-.containerPhoto{
-    width: 90%;
-    margin: 0 auto;
-    height: auto;
-    display: flex;
-    justify-content: left;
-    flex-wrap: wrap;
-}
+
 .containergrandephotoadm{
     width: 100%;
     height: 100%;
 }
 .grandephotoadm{
-    width: 500px;
-    margin-top: 50px;
-    margin-left: 50px;
+    width: 600px;
 }
 .videoinfo{
     position: absolute;

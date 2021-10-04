@@ -8,7 +8,7 @@ if(!isset($_GET['id']))
 }
 require '../connexion.php';
 
-$req = $bdd->prepare("SELECT idphoto,source, album from photos where idphoto=?");
+$req = $bdd->prepare("SELECT idphoto,source, date_format(date, '%d / %m / %Y') as myDate from photos where idphoto=?");
 $req->execute([$id]);
 if(!$don = $req->fetch())
 {
@@ -30,9 +30,15 @@ $req->closecursor();
     <title>photo numero <?= $don['idphoto']?></title>
 </head>
 <body>
-<div class="containergrandephotoadm">
-<img class='grandephotoadm' src="<?=$don['source']?>" alt="photo1">
+    <h1 class="text-center">Detail de la photo numéro <?=$don['idphoto']?></h1>
+    <div class="text-center">
+    <a href="gphoto.php" class="btn btn-primary mx-3 my-3">Retour</a>
+    <div class="container-fluid">
+        <img class='grandephotoadm my-3 mx-3' src="../images/photo/<?=$don['source']?>" alt="photo1">
+        <h3 class='my-3 mx-3'>Date de la photo : <?=$don['myDate']?></h3>
 </div>
+</div>
+
 
 
 </body>

@@ -23,11 +23,13 @@ require '../connexion.php';
 <body>
 
 <div class="container-fluid">
-<h1 class="text-center">Gestion des Photos</h1>
+    <div class="text-center my-3">
+<h1 class="text-center my-3">Gestion des Photos</h1>
 <a href="addphoto.php" class="btn btn-primary my-3 mx-3">Ajouter des photos</a>
 <a href="../index.php" target="_blank" class="btn btn-secondary my-3 mx-3">Retour au site</a>
 <a href="dashboard.php" class="btn btn-secondary mx-3 my-3">Retour</a>
 <a href="dashboard.php?deco=ok" id="deco" class="btn btn-secondary my-3 mx-3">Deconnexion</a>
+</div>
 
 <?php
 if(isset($_GET['add']))
@@ -42,29 +44,42 @@ if(isset($_GET['update']))
 }
 if(isset($_GET['delete']))
 {
-    echo "<div class='alert alert-success'>La photo a été supprimée</div>";
+    echo "<div class='alert alert-success'>La photo numero ".$_GET['id']." a été supprimée</div>";
 
 }
 ?>
 
-<div class="containerPhoto">
+<div class="container-fluid">
+<table class="col-10 mx-auto my-3">
+    <thead>
+        <tr>
+            <th>Id_Photo</th>
+            <th>Photo</th>
+            <th>Date</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+<tbody>
     <?php 
     
-    $req = $bdd->query('SELECT idphoto,nom,source from photos');
+    $req = $bdd->query("SELECT idphoto,source,date_format(date,'%d / %m / %Y') as myDate  from photos order by idphoto");
     $count = $req->rowcount();
     if($count>0){
-        echo "<div class='containerPhoto'>";
         while($don = $req->fetch()){
-            echo "<div class='containerseul'>";
-            echo "<a href='photounique.php?id=".$don['idphoto']."'><div><img class='photoadm' src='".$don['source']."' alt='image de'".$don['nom']."></div></a> ";
-
-            echo "<a href='deletephoto.php?id=".$don['idphoto']."&delete=ok' class='btn btn-warning my-3'>Delete</a>";
+            echo "<tr class='my-3'>";
+            echo '<td>'.$don['idphoto'].'</td>';
+            echo "<td><img class='photoadm' src='../images/photo/mini_".$don['source']."' alt='image de'".$don['source']."></td>";
+            echo '<td>'.$don['myDate'].'</td>';
+            echo "<td class='text-center'><a href='deletephoto.php?id=".$don['idphoto']."' class='btn btn-warning my-3 mx-3'>Delete</a>
+            <a href='photounique.php?id=".$don['idphoto']."' class='btn btn-primary my-3 mx-3'>Detail</a>
+            </td> ";
+           echo '</tr>';
         }
-        echo "</div>";
-        echo "</div>";
     }$req->closecursor();
     
     ?>
+    </tbody>
+    </table>
 </div>
 
 
