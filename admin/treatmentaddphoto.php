@@ -24,6 +24,13 @@ if(isset($_FILES['image'])){
         $date = $_POST['date'];
     }
 
+    if($_POST['album'] > 6 OR $_POST['album'] < 0 )
+    {
+        $error = 3;
+    }else{
+        $album = htmlspecialchars($_POST['album']);
+    }
+
 if($error==0)
 {
     $dossier = '../images/photo/';
@@ -52,10 +59,11 @@ if($error==0)
         if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichiercptl))
         {
             require '../connexion.php';
-            $insert = $bdd->prepare("INSERT INTO photos(source,date) values(:source,:date)");
+            $insert = $bdd->prepare("INSERT INTO photos(source,date,numCouv) values(:source,:date,:album)");
             $insert->execute([
                 ":source"=>$fichiercptl,
-                ":date"=>$date
+                ":date"=>$date,
+                ":album"=>$album
             ]);
             $insert->closeCursor();
 

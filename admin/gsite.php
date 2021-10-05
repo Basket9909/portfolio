@@ -37,12 +37,12 @@ if(isset($_GET['add']))
 }
 if(isset($_GET['update']))
 {
-    echo "<div class='alert alert-success'>Le site a été modifié</div>";
+    echo "<div class='alert alert-success'>Le site numero ".$_GET['id']." a été modifié</div>";
 
 }
 if(isset($_GET['delete']))
 {
-    echo "<div class='alert alert-success'>Le site a été supprimé</div>";
+    echo "<div class='alert alert-success'>Le site numero ".$_GET['id']." a été supprimé</div>";
 
 }
 ?>
@@ -52,6 +52,7 @@ if(isset($_GET['delete']))
                 <th>Id</th>
                 <th>site</th>
                 <th>Date</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -64,9 +65,10 @@ if(isset($_GET['delete']))
                     echo "<td>".$don['idsite']."</td>";
                     echo "<td>".$don['nom']."</td>";
                     echo "<td>".$don['myDate']."</td>";
-                    echo "<td> <a href='infosite.php?id=".$don['idsite']."' class='btn btn-primary mx-2'>+ Infos</a></td>";
-                    echo "<td> <a href='updatesite.php?id=".$don['idsite']."' class='btn btn-warning mx-2'>Modifier</a></td>";
-                    echo "<td> <a href='deletesite.php?id=".$don['idsite']."&delete=oks' class='btn btn-danger mx-2'>Supprimer</a></td>";
+                    echo "<td class='d-flex justify-content-evenly'> <a href='infosite.php?id=".$don['idsite']."' class='btn btn-primary '>+ Infos</a>";
+                    echo "<a href='updatesite.php?id=".$don['idsite']."' class='btn btn-warning'>Modifier</a>";
+                    echo "<a href='deletesite.php?id=".$don['idsite']."' class='btn btn-danger '>Supprimer</a>";
+                    echo "</td>";
                     echo "</tr>";
 
                 }

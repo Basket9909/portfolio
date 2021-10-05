@@ -37,6 +37,18 @@ require '../connexion.php';
         <input type="date" id="date" name="date" class="form-control">
     </div>
     <div class="mb-3">
+        <label for="album">Numero pour photo de couverture</label>
+        <select name="album" id="album" class="form-control">
+            <option selected value="0"></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+    </div>
+    <div class="mb-3">
         <input type="submit" name="submit" id="submit" value="Ajouter" class="form-control btn btn-success">
     </div>
     </form>

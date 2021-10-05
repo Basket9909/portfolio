@@ -56,13 +56,14 @@ if(isset($_GET['delete']))
             <th>Id_Photo</th>
             <th>Photo</th>
             <th>Date</th>
+            <th>N° Couv</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
 <tbody>
     <?php 
     
-    $req = $bdd->query("SELECT idphoto,source,date_format(date,'%d / %m / %Y') as myDate  from photos order by idphoto");
+    $req = $bdd->query("SELECT idphoto,source,date_format(date,'%d / %m / %Y') as myDate,numCouv  from photos order by idphoto");
     $count = $req->rowcount();
     if($count>0){
         while($don = $req->fetch()){
@@ -70,8 +71,10 @@ if(isset($_GET['delete']))
             echo '<td>'.$don['idphoto'].'</td>';
             echo "<td><img class='photoadm' src='../images/photo/mini_".$don['source']."' alt='image de'".$don['source']."></td>";
             echo '<td>'.$don['myDate'].'</td>';
+            echo '<td>'.$don['numCouv'].'</td>';
             echo "<td class='text-center'><a href='deletephoto.php?id=".$don['idphoto']."' class='btn btn-warning my-3 mx-3'>Delete</a>
             <a href='photounique.php?id=".$don['idphoto']."' class='btn btn-primary my-3 mx-3'>Detail</a>
+            <a href='updatephoto.php?id=".$don['idphoto']."' class='btn btn-primary my-3 mx-3'>Modifier</a>
             </td> ";
            echo '</tr>';
         }

@@ -7,14 +7,27 @@ if(!isset($_SESSION['login']))
     header("LOCATION:index.php");
 }
 	
-$source = imagecreatefromjpeg("../images/photo/".$_GET['image']); // La photo est la source
+if(isset($_GET['site']))
+{
+    $source = imagecreatefromjpeg("../images/site/".$_GET['image']);
+}else{
+
+    $source = imagecreatefromjpeg("../images/photo/".$_GET['image']); // La photo est la source
+}
 
 
 
 
 // getimagesize retourne un array contenant la largeur [0] et la hauteur [1]
 
-$TailleImageChoisie = getimagesize("../images/photo/".$_GET['image']);
+if(isset($_GET['site']))
+{
+    $TailleImageChoisie = getimagesize("../images/site/".$_GET['image']);
+
+}else{
+
+    $TailleImageChoisie = getimagesize("../images/photo/".$_GET['image']);
+}
 
 // je définis la largeur de l'image.
 
@@ -44,19 +57,42 @@ imagecopyresampled($destination, $source, 0, 0, 0, 0, $NouvelleLargeur, $Nouvell
 
 // On enregistre la miniature sous le nom "mini_"
 
-$rep_nom="../images/photo/mini_".$_GET['image'];
+if(isset($_GET['site']))
+{
+    $rep_nom="../images/site/mini_".$_GET['image'];
+
+}else{
+
+    $rep_nom="../images/photo/mini_".$_GET['image'];
+}
+
 
 imagejpeg($destination,$rep_nom,80);
 
 // redirection
 
-if(isset($_GET['update']))
+
+if(isset($_GET['site']))
 {
-    header("LOCATION:gphoto.php?update=success&id=".$_GET['update']);
+    if(isset($_GET['update']))
+    {
+    header("LOCATION:gsite.php?update=success&id=".$_GET['update']);
+    }else{
+
+    header("LOCATION:gsite.php?add=success");
+}
+
 }else{
+
+    if(isset($_GET['update']))
+    {
+    header("LOCATION:gphoto.php?update=success&id=".$_GET['update']);
+    }else{
 
     header("LOCATION:gphoto.php?add=success");
 }
+}
+
 
 
 ?>

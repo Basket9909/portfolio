@@ -12,7 +12,7 @@ if(!isset($_GET['id']))
     $id = htmlspecialchars($_GET['id']);
 }
 require '../connexion.php';
-$req = $bdd->prepare("SELECT nom,image,source,date,description FROM sites where idsite=?");
+$req = $bdd->prepare("SELECT idsite,nom,image,source,date,description FROM sites where idsite=?");
 $req->execute([$id]);
 if(!$don=$req->fetch())
 {
@@ -36,8 +36,8 @@ if(!$don=$req->fetch())
     <a href="gsite.php" class="btn btn-secondary mx-3 my-3">Retour</a>
         <div class="row">
         <div class="col-6 offset-3">
-    <h1 class="text-center">update pour la video :  <?=$don['nom']?></h1>
-    <form action="treatmentupdatesite.php" method="POST" enctype="multipart/form-data">
+    <h1 class="text-center">update pour le site :  <?=$don['nom']?></h1>
+    <form action="treatmentupdatesite.php?id=<?= $don['idsite'] ?>" method="POST" enctype="multipart/form-data">
 
 
     <div class="mb-3">
@@ -62,7 +62,7 @@ if(!$don=$req->fetch())
         <?php
                         if(!empty($don['image']))
                         {
-                            echo ' <div class="col-2 mb-3"><img class="img-fluid" src="../images/site/'.$don['image'].'" alt=""></div>';
+                            echo ' <div class="col-2 mb-3"><img class="img-fluid" src="../images/site/mini_'.$don['image'].'" alt=""></div>';
                         }else{
                             echo "<div><strong>Aucune image</strong></div>";
                         }

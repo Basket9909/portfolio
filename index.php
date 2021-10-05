@@ -1,3 +1,9 @@
+<?php 
+
+require 'connexion.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -191,12 +197,39 @@ J’ai ensuite étudier deux ans dans cette même école le web développement. 
     <h4 class="realise long">Photos réalisée</h4>
     <a class="voir_plus" href="#" >Voir plus</a>
     <div class="container_photo">
-        <div id="i1"><img id="img1" class="img gauche" src="images/photo/val.jpg" alt="val"></div>
-        <div id="i2"><img id="img2" class="img"  src="images/photo/louis2.jpg" alt="val"></div>
-        <div id="i3"><img id="img3" class="img gauche" src="images/photo/mat.jpg" alt="val"></div>
-        <div id="i4"><img id="img4" class="img" src="images/photo/louis1.jpg" alt="val"></div> 
-        <div id="i5"><img id="img5" class="img " src="images/photo/mat1.jpg" alt="val"></div>
-        <div id="i6"><img id="img6" class="img gauche" src="images/photo/louis.jpg" alt="val"></div>
+        <?php
+        $req1 = $bdd->query("SELECT source,numCouv from photos where numCouv=1");
+        if($don1 = $req1->fetch())
+        {
+            echo '<div id="i1"><img id="img1" class="img gauche" src="images/photo/'.$don1['source'].'" alt="val"></div>';
+        }
+        $req2 = $bdd->query("SELECT source,numCouv from photos where numCouv=2");
+        if($don2 = $req2->fetch())
+        {
+            echo '<div id="i2"><img id="img2" class="img"  src="images/photo/'.$don2['source'].'" alt="val"></div>';
+        }
+        $req3 = $bdd->query("SELECT source,numCouv from photos where numCouv=3");
+        if($don3 = $req3->fetch())
+        {
+        echo '<div id="i3"><img id="img3" class="img gauche" src="images/photo/'.$don3['source'].'" alt="val"></div>';
+        }
+        $req4 = $bdd->query("SELECT source,numCouv from photos where numCouv=4");
+        if($don4 = $req4->fetch())
+        {
+            echo '<div id="i4"><img id="img4" class="img" src="images/photo/'.$don4['source'].'" alt="val"></div>';
+        }
+        $req5 = $bdd->query("SELECT source,numCouv from photos where numCouv=5");
+        if($don5 = $req5->fetch())
+        {
+            echo '<div id="i5"><img id="img5" class="img " src="images/photo/'.$don5['source'].'" alt="val"></div>';
+        }
+        $req6 = $bdd->query("SELECT source,numCouv from photos where numCouv=6");
+        if($don6 = $req6->fetch())
+        {
+            echo '<div id="i6"><img id="img6" class="img gauche" src="images/photo/'.$don6['source'].'" alt="val"></div>';
+        }
+        ?>
+        
     </div>
     <a class="voir_plus_alt pourquoi" href="#" >Voir plus</a>
 </div>

@@ -41,59 +41,57 @@ if(isset($_POST['name']))
 if($error==0)
 {
     
-    $dossier = "../images/site/";
+    $dossier = '../images/site/';
     $fichier = basename($_FILES['image']['name']);
-    $taillemax = 20000000000;
+    $taille_maxi = 2000000;
     $taille = filesize($_FILES['image']['tmp_name']);
-    $extensions = ['.png','.jpg','.jpeg','.webp'];
-    $extension = strrchr($_FILES['image']['name'],'.');
+    $extensions = array('.png','.jpg','.jpeg, jpe');
+    $extension = strrchr($_FILES['image']['name'], '.');
 
-    if(!in_array($extension,$extensions))
+    if(!in_array($extension , $extensions))
     {
-        $fileError = "Mauvaise extension";
+        $erreur = 'Vous devez uploader un fichier de type png, jpg, jpeg'; 
+    }
+    if($taille>$taille_maxi)
+    {
+        $erreur = 'Le fichier dépasse la taille autorisée';
     }
 
-    if($taille > $taillemax)
+    if(!isset($erreur))
     {
-        $fileError = "Fichier trop volumineux";
-    }
-
-    if(!isset($fileError))
-    {
-
-        $fichier = strrchr($fichier,            
-        'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
-        'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-
-        $fichier = preg_replace('/([^.a-z0-9]+)/i','-',$fichier);
-
-        $fichiercpt = rand().$fichier;
-
-        if(move_uploaded_file($_FILES['image']['tmp_name'],$dossier.$fichiercpt))
+        $fichier = strtr($fichier,
+            'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
+            'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+        $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+        $fichiercptl=rand().$fichier;
+        if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichiercptl))
         {
-
-            require "../connexion.php";
-            $insert = $bdd->prepare("INSERT INTO sites(nom,source,image,date,description) values(:nom,:source,:image,:date,:descri)");
+            require '../connexion.php';
+            $insert = $bdd->prepare("INSERT INTO sites(nom,image,source,date,description) values(:nom,:im,:source,:date,:descri)");
             $insert->execute([
-                ":nom"=> $name,
-                ":source"=> $lien,
-                ":image"=> $dossier.$fichiercpt,
-                ":date"=> $date,
-                ":descri"=> $descri
+                ":nom"=>$name,
+                ":im"=>$fichiercptl,
+                ":source"=>$lien,
+                ":date"=>$date,
+                ":descri"=>$descri
             ]);
-            $insert->closecursor();
-            header("LOCATION:gsite.php?add=success");
+            $insert->closeCursor();
 
-            }else{
-             header("LOCATION:addsite.php?upload=error");
-     }
+            if($extension==".png")
+                    {
+                        header("LOCATION:redimpng.php?site=ok&image=".$fichiercptl);
+                    }
+                    else
+                    {
+                        header("LOCATION:redim.php?site=ok&image=".$fichiercptl);
+                    }
+        }else{
+            header("LOCATION:addsite.php?error=7&upload=echec");
+        }
+
     }else{
-    header("LOCATION:addsite.php?fileerror=".$fileError);
+        header("LOCATION:addsite.php?error=7&fich=".$erreur);
     }
-
-
-
-
     }else{
     header("LOCATION:addsite.php?error=".$error);
     }

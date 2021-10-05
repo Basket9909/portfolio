@@ -53,6 +53,7 @@ if(isset($_GET['delete']))
                 <th>Id</th>
                 <th>Video</th>
                 <th>Date</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -65,9 +66,10 @@ if(isset($_GET['delete']))
                     echo "<td>".$don['idvideo']."</td>";
                     echo "<td>".$don['nom']."</td>";
                     echo "<td>".$don['myDate']."</td>";
-                    echo "<td> <a href='infovideo.php?id=".$don['idvideo']."' class='btn btn-primary mx-2'>+ Infos</a></td>";
-                    echo "<td> <a href='updatevideo.php?id=".$don['idvideo']."' class='btn btn-warning mx-2'>Modifier</a></td>";
-                    echo "<td> <a href='deletevideo.php?id=".$don['idvideo']."' class='btn btn-danger mx-2'>Supprimer</a></td>";
+                    echo "<td class='d-flex justify-content-evenly'> <a href='infovideo.php?id=".$don['idvideo']."' class='btn btn-primary mx-2'>+ Infos</a>";
+                    echo " <a href='updatevideo.php?id=".$don['idvideo']."' class='btn btn-warning mx-2'>Modifier</a>";
+                    echo " <a href='deletevideo.php?id=".$don['idvideo']."' class='btn btn-danger mx-2'>Supprimer</a>";
+                    echo "</td>";
                     echo "</tr>";
 
                 }

@@ -59,10 +59,9 @@ if($error==0)
 {
     if(empty($_FILES['image']['tmp_name']))
     {
-        require "../connexion.php";
         $update = $bdd->prepare("UPDATE sites SET nom=:nom, description=:descri, source=:lien, date=:date WHERE idsite=:myId");
         $update->execute([
-            ":nom"=>$nom,
+            ":nom"=>$name,
             ":descri"=>$descri,
             ":lien"=>$lien,
             ":date"=>$date,
@@ -72,57 +71,60 @@ if($error==0)
         header("LOCATION:gsite.php?update=success&id=".$id);
     }else{
 
-        $dossier = "../images/site/";
-        $fichier = basename($_FILES['image']['name']);
-        $taillemax = 20000000000;
-        $taille = filesize($_FILES['image']['tmp_name']);
-        $extensions = ['.png','.jpg','.jpeg','.webp'];
-        $extension = strrchr($_FILES['image']['name'],'.');
-    
-        if(!in_array($extension,$extensions))
-        {
-            $fileError = "Mauvaise extension";
-        }
-    
-        if($taille > $taillemax)
-        {
-            $fileError = "Fichier trop volumineux";
-        }
-    
-        if(!isset($fileError))
-        {
-    
-            $fichier = strrchr($fichier,            
+    $dossier = '../images/site/';
+    $fichier = basename($_FILES['image']['name']);
+    $taille_maxi = 2000000;
+    $taille = filesize($_FILES['image']['tmp_name']);
+    $extensions = array('.png','.jpg','.jpeg, jpe');
+    $extension = strrchr($_FILES['image']['name'], '.');
+
+    if(!in_array($extension , $extensions))
+    {
+        $erreur = 'Vous devez uploader un fichier de type png, jpg, jpeg'; 
+    }
+    if($taille>$taille_maxi)
+    {
+        $erreur = 'Le fichier dépasse la taille autorisée';
+    }
+
+    if(!isset($erreur))
+    {
+        $fichier = strtr($fichier,
             'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
             'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-    
-            $fichier = preg_replace('/([^.a-z0-9]+)/i','-',$fichier);
-    
-            $fichiercpt = rand().$fichier;
-    
-            if(move_uploaded_file($_FILES['image']['tmp_name'],$dossier.$fichiercpt))
-            {
-    
-                require "../connexion.php";
-                unlink("../images/".$don['image']);
-                $update = $bdd->prepare("UPDATE sites SET nom=:nom, source=:lien, description=:descri, image=:img, date=:date WHERE idsite=:myId");
-                $update->execute([
-                ":nom"=>$nom,
-                ":lien"=>$lien,
-                ":descri"=>$descri,
-                ":img"=>$fichier.$fichiercpt,
-                ":date"=>$date,
-                ":myId"=>$id
-                ]);
-                $update->closecursor();
-                header("LOCATION:gsite.php?update=success&id=".$id);
-    
-                }else{
-                 header("LOCATION:updatesite.php?id=".$id."upload=error");
-         }
+        $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+        $fichiercptl=rand().$fichier;
+        if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichiercptl))
+        {
+            require '../connexion.php';
+            unlink("../images/site/".$don['image']);
+            unlink("../images/site/mini_".$don['image']);
+            $update = $bdd->prepare("UPDATE sites SET nom=:nom, description=:descri, source=:lien, date=:date , image=:img WHERE idsite=:myId");
+        $update->execute([
+            ":nom"=>$name,
+            ":descri"=>$descri,
+            ":lien"=>$lien,
+            ":date"=>$date,
+            ":img"=>$fichiercptl,
+            ":myId"=>$id
+        ]);
+        $update->closecursor();
+
+            if($extension==".png")
+                    {
+                        header("LOCATION:redimpng.php?site=ok&update=".$id."&image=".$fichiercptl);
+                    }
+                    else
+                    {
+                        header("LOCATION:redim.php?site=ok&update=".$id."&image=".$fichiercptl);
+                    }
         }else{
-        header("LOCATION:updatesite.php?id=".$id."&fileerror=".$fileError);
+            header("LOCATION:addsite.php?error=7&upload=echec");
         }
+
+    }else{
+        header("LOCATION:addsite.php?error=7&fich=".$erreur);
+    }
     
     }
     
