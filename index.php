@@ -2,6 +2,7 @@
 
 require 'connexion.php';
 
+
 ?>
 
 <!DOCTYPE html>
@@ -176,17 +177,22 @@ J’ai ensuite étudier deux ans dans cette même école le web développement. 
 <h2 class="sous_titre"  data-aos="fade-up">Portfolio</h2>
 <div class="wrapper">
     <h4 class="realise">Sites réalisé</h4>
-    <a class="voir_plus" href="#" >Voir plus</a>
+    <a class="voir_plus" href="site.php" >Voir plus</a>
     <div class="container_site">
-        <div class="assemblage">
-        <div class="test_site" ></div> <h5 class="site_pour">Site réalisé pour : </h5></div>
-        <div class="assemblage">
-        <div class="test_site"></div> <h5 class="site_pour">Site réalisé pour : </h5></div>
-        <div class="assemblage">
-        <div class="test_site"></div> <h5 class="site_pour">Site réalisé pour : </h5></div>
+        <?php
+         $req = $bdd->query("SELECT nom,image,source,description,DATE_FORMAT(date,'%d / %m / %y') as myDate from sites order by idsite limit 0,3 ");
+         while($don = $req->fetch()){
+            echo '<div class="assemblage">
+            <a href="'.$don['source'].'" target="_BLANK"><div class="test_site"><img src="images/site/'.$don['image'].'" alt="'.$don['nom'].'" class="cover"></div></a>
+             <a href="'.$don['source'].'" target="_BLANK"> <h5 class="site_pour"> '.$don['nom'].'</h5></a>
+             <h4 class="moreInfo">'.$don['description'].'</h4>
+             <h3 class="date">Le '.$don['myDate'].'</h3>
+             <div class="descri"></div></div>';
+         }
+        ?>   
     </div>  
     <a class=" voir_plus_alt" href="#" >Voir plus</a>
-    <h4 class="realise long">Vidéos réalisée</h4>
+   <!-- <h4 class="realise long">Vidéos réalisée</h4>
     <a class="voir_plus" href="#" >Voir plus</a>
     <div class="container_site">
         <div class="test_site video"></div>
@@ -231,7 +237,7 @@ J’ai ensuite étudier deux ans dans cette même école le web développement. 
         ?>
         
     </div>
-    <a class="voir_plus_alt pourquoi" href="#" >Voir plus</a>
+    <a class="voir_plus_alt pourquoi" href="#" >Voir plus</a> -->
 </div>
 </div>
 <div id="contact" data-aos="fade-up">

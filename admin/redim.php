@@ -31,7 +31,7 @@ if(isset($_GET['site']))
 
 // je définis la largeur de l'image.
 
-$NouvelleLargeur = 300;
+$NouvelleLargeur = 500;
 
  
 

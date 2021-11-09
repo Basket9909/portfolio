@@ -527,19 +527,38 @@ h1{
     height: 2px;
     border-radius: 5px;
 }
+
 .container_site{
     width: 100%;
     height: auto;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    padding-bottom: 50px;
 }
 .test_site{
     width: 500px;
     height: 250px;
-    background-color: black;
     border-radius: 20px;
     margin: 10vh 15px 2vh 0;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.5s;
+    overflow: hidden;
+}
+a{
+    text-decoration: none;
+}
+
+.test_site:hover .cover{
+    transform: scale(1.1);
+}
+.cover{
+    transition: all 0.5s;
+    border-radius: 20px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 .site_pour{
     width: auto;
@@ -547,6 +566,7 @@ h1{
     color: black;
     font-family: 'Playfair Display', serif;
     font-size: 1.5em;
+    cursor: pointer;
 }
 .voir_plus{
     position: absolute;
@@ -560,6 +580,23 @@ h1{
     text-decoration: none;
     transition: all 0.1s;
 }
+.descri{
+    width: 500px;
+    height: auto;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    line-height: 30px;
+    margin-top: 20px;
+}
+.moreInfo{
+    font-family: 'Playfair Display', serif;
+    width: 500px;
+    text-align: center;
+    font-weight: 100;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
 .voir_plus_alt{
     display: none;
     position: absolute;
@@ -675,6 +712,31 @@ h1{
     transform: rotate(-5deg);
 
 }
+
+.allSite {
+    width: 100%;
+    height: auto;
+    background-color: #E5B64A;
+}
+.date{
+    width: 500px;
+    text-align: center;
+    margin-top: 10px;
+}
+.titreAllSite{
+    color: black;
+    font-size: 3em;
+    font-weight: 1;
+    font-family: 'Playfair Display', serif;
+
+}
+.containerAllSite{
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 @media all and (max-width: 1200px){
     .voir_plus{
         margin-left: 80%;
@@ -748,6 +810,22 @@ h1{
     .pourquoi{
         margin-top: -10vh;
     }
+    .descri{
+        width: 300px;
+        line-height: 30px;
+        margin-top: 20px;
+        font-size: 0.8em;
+    }
+    .moreInfo{
+        width: 300px;
+        margin-top: 20px;
+        font-size: 0.8em;
+    }
+    .date{
+        width: 300px;
+        font-size: 0.8em;
+        margin-top: 10px;
+    }
 }
 @media all and (max-width: 600px){
     .voir_plus{
@@ -800,10 +878,15 @@ h1{
     }
 }
 @media all and (max-width: 400px){
+    .titreAllSite{
+        font-size: 1.5em;
+        margin: 0;
+    }
     .test_site{
         width: 200px;
         height: 100px;
     }
+    
     #img1,#img2,#img3,#img4,#img5,#img6{
         width: 100px;
         height: 200px;
@@ -811,6 +894,25 @@ h1{
     .container_photo{
         width: 200px;
         grid-template-columns: repeat(2,100px);
+    }
+    .site_pour{
+        font-size: 1em;
+    }
+    .descri{
+        width: 200px;
+        line-height: 30px;
+        font-size: 0.75em;
+    }
+    .moreInfo{
+        width: 200px;
+        font-size: 0.75em;
+    }
+    .date{
+        width: 200px;
+        font-size: 0.75em;
+    }
+    .assemblage{
+        margin-top: -50px;
     }
 }
 

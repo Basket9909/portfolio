@@ -1,5 +1,6 @@
 const slide1 = document.querySelector('#home')
 const picts = slide1.querySelectorAll('.fist_icons')
+const assemblages = document.querySelectorAll('.assemblage')
 slide1.addEventListener('mousemove',(e)=>{
             var rand = Math.random()*20
             const mouseX = e.pageX
@@ -22,3 +23,13 @@ slide1.addEventListener('mousemove',(e)=>{
                 pict.style.transform = `rotate(${deltarotate}deg) translate(${deltamouseX*moveX}%,${deltamouseY*moveY}%)`
             })
         })
+
+
+assemblages.forEach(assemblage =>{
+    const more = assemblage.querySelector('.moreInfo')
+    more.addEventListener('click',()=>{
+        console.log('ok')
+        const descri = assemblage.querySelector('.descri')
+        descri.innerHTML=`'.$don['description'].'`
+    })
+})
