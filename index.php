@@ -16,10 +16,10 @@ require 'connexion.php';
     <title>Portfolio Wilmart Romeo</title>
 </head>
 <body>
-<div id="openLogo">
-    <img id="openLogoImage" src="images/logo.svg" alt="logo_Menu1">
-</div>
-<div id="home">
+    <div id="openLogo">
+        <img id="openLogoImage" src="images/logo.svg" alt="logo_Menu1">
+    </div>
+    <div id="home">
     <nav>
     <div id="logoMenu">
         <img id="logoImage" src="images/logo.svg" alt="logo_Menu">
@@ -36,6 +36,15 @@ require 'connexion.php';
             <div class="bar ligneH"></div>
             <div class="bar ligneM"></div>
             <div class="bar ligneB"></div>
+    </div>
+    <div class="menuBurger">
+            <div class="containerMenuBurger">
+                <a href="#home" class="lienMenuBurger">Home</a>
+                <a href="#about" class="lienMenuBurger">About</a>
+                <a href="#competence" class="lienMenuBurger">Compétences</a>
+                <a href="#portfolio" class="lienMenuBurger">Portfolio</a>
+                <a href="#contact" class="lienMenuBurger">Contact</a>
+            </div>
         </div>
     <img data-movey="100" data-movex="70" data-rotate="-20" class="fist_icons pict" id="photo"src="images/intro_icons/camera-solid.svg" alt="first_icons">
     <img data-movey="150" data-movex="-50" data-rotate="5" class="fist_icons pict" id="code" src="images/intro_icons/code-solid.svg" alt="first_icons">
@@ -187,7 +196,7 @@ J’ai ensuite étudier deux ans dans cette même école le web développement. 
              <a href="'.$don['source'].'" target="_BLANK"> <h5 class="site_pour"> '.$don['nom'].'</h5></a>
              <h4 class="moreInfo">'.$don['description'].'</h4>
              <h3 class="date">Le '.$don['myDate'].'</h3>
-             <div class="descri"></div></div>';
+             <div class="description"></div></div>';
          }
         ?>   
     </div>  
@@ -265,5 +274,6 @@ J’ai ensuite étudier deux ans dans cette même école le web développement. 
 AOS.init()
 </script>
 <script type="text/javascript" src="js/mouse.js"></script>
+<script type="text/javascript" src="js/burger.js"></script>
 </body>
 </html>

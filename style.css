@@ -117,7 +117,7 @@ nav ul li a:hover::after{
     transform: translateY(-50%);
     position: absolute;
     cursor: pointer;
-    z-index: 1000000;
+    z-index: 10000000;
   }
   
   #burger .bar {
@@ -131,6 +131,106 @@ nav ul li a:hover::after{
     -o-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
+  }
+  .menuBurger {
+    background-color: #E5B64A;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-top: -75px;
+    z-index: 10000;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    -webkit-transform: translate(100%, 0);
+    -moz-transform: translate(100%, 0);
+    -o-transform: translate(100%, 0);
+    -ms-transform: translate(100%, 0);
+    transform: translate(100%, 0);
+  }
+  .open {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    -webkit-transform: translate(0%, 0%);
+    -moz-transform: translate(0%, 0%);
+    -o-transform: translate(0%, 0%);
+    -ms-transform: translate(0%, 0%);
+    transform: translate(0%, 0%);
+    position: fixed;
+  }
+  
+  #burger .haut {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    -webkit-transform: rotate(-45deg) translate(-13px);
+    -moz-transform: rotate(-45deg) translate(-13px);
+    -o-transform: rotate(-45deg) translate(-13px);
+    -ms-transform: rotate(-45deg) translate(-13px);
+    transform: rotate(-45deg) translate(-13px);
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    background-color: black;
+  }
+  
+  #burger .bas {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    -webkit-transform: rotate(45deg) translate(-13px);
+    -moz-transform: rotate(45deg) translate(-13px);
+    -o-transform: rotate(45deg) translate(-13px);
+    -ms-transform: rotate(45deg) translate(-13px);
+    transform: rotate(45deg) translate(-13px);
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    background-color: black;
+  }
+  
+  #burger .milieu {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    display: hidden;
+  }
+  
+  .containerMenuBurger {
+    height: auto;
+    width: auto;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: relative;
+  }
+  
+  .lienMenuBurger {
+    width: 100%;
+    text-align: center;
+    font-family:'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: black;
+    text-decoration: none;
+    margin: 20px 0;
   }
 #home{
     height: 100%;
@@ -466,9 +566,14 @@ h1{
     }
     .grand_rec{
         margin: 0 auto;
+        text-align: center;
     }
     .ligne_slide_3{
         display: block;
+    }
+    .picto_comp{
+        height: 20px;
+        margin: 10px 15px 0px 15px;
     }
     
 }
@@ -484,7 +589,6 @@ h1{
     }
     .picto_comp{
         height: 20px;
-        margin: 10px 30px 0px 0px;
     }
 }
 @media all and (max-width: 500px){
@@ -493,7 +597,6 @@ h1{
     }
     .picto_comp{
         height: 20px;
-        margin: 10px 25px 0px 0px;
     }
 }
 @media all and (max-width: 360px){
@@ -502,7 +605,6 @@ h1{
     }
     .picto_comp{
         height: 20px;
-        margin: 10px 25px 0px 0px;
     }
 }
 #portfolio{
@@ -580,7 +682,7 @@ a{
     text-decoration: none;
     transition: all 0.1s;
 }
-.descri{
+.description{
     width: 500px;
     height: auto;
     text-align: center;
@@ -810,7 +912,7 @@ a{
     .pourquoi{
         margin-top: -10vh;
     }
-    .descri{
+    .description{
         width: 300px;
         line-height: 30px;
         margin-top: 20px;
@@ -898,7 +1000,7 @@ a{
     .site_pour{
         font-size: 1em;
     }
-    .descri{
+    .description{
         width: 200px;
         line-height: 30px;
         font-size: 0.75em;
